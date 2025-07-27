@@ -101,40 +101,39 @@ h1 {
 }
 
 .pad-yellow {
-  border-bottom-left-radius: 200px; /* fixed */
+  border-bottom-left-radius: 200px;
   background-color: yellow;
-  transform: rotate(270deg); /* rotate pad into correct position */
 }
 
 .pad-yellow:hover,
 .pad-yellow:focus {
   background-color: #ffb900;
-  transform: rotate(270deg) scale(1.05); /* keep rotation, add hover effect */
+  transform: rotate(5deg);
 }
 
 .pad-yellow:active,
 .pad-yellow.activated {
   background-color: #ffca3d;
-  transform: rotate(270deg) translateY(10px); /* keep rotation */
+  transform: translateY(10px);
 }
 
 .pad-blue {
-  border-bottom-right-radius: 200px; /* fixed */
+  border-bottom-right-radius: 200px;
   background-color: blue;
-  transform: rotate(90deg); /* rotate pad into correct position */
 }
 
 .pad-blue:hover,
 .pad-blue:focus {
   background-color: #139ddd;
-  transform: rotate(90deg) scale(1.05); /* keep rotation */
+  transform: rotate(5deg);
 }
 
 .pad-blue:active,
 .pad-blue.activated {
   background-color: #2bbcff;
-  transform: rotate(90deg) translateY(10px); /* keep rotation */
+  transform: translateY(10px);
 }
+
 
 
 .hidden {
