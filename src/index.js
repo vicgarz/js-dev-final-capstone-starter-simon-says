@@ -87,13 +87,17 @@ function playComputerTurn() {
   const { color } = getRandomItem(pads);
   computerSequence.push(color);
 
-  // 🎯 Display current round
-  setText(statusSpan, `Round ${currentRound} of ${roundCount}`);
+  // ✅ Show status message
+  setText(statusSpan, `Round ${computerSequence.length} — Watch closely`);
   statusSpan.classList.remove("hidden");
 
+  // ⏯ Play the sequence
   activatePads(computerSequence);
+
+  // ⏱ After sequence, switch to human's turn
   setTimeout(() => playHumanTurn(), computerSequence.length * 600 + 1000);
 }
+
 
 
 function playHumanTurn() {
@@ -147,11 +151,13 @@ function resetGame(text) {
 function startButtonHandler() {
   setLevel(1);
   startButton.classList.add("hidden");
-  setText(heading, `Level ${level}`);
+  setText(heading, "Simon Says"); 
   computerSequence = [];
   humanSequence = [];
+  currentRound = 1;
   playComputerTurn();
 }
+
 
 /**
  * EVENT LISTENERS
