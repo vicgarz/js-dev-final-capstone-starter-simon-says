@@ -39,7 +39,8 @@ let computerSequence = [];
 let humanSequence = [];
 let level = 1;
 let roundCount = 0;
-let currentRound = 0;
+let currentRound = 1;
+
 
 /**
  * GAME FUNCTIONS
@@ -49,9 +50,10 @@ function setLevel(input = 1) {
   if (!validLevels[input]) return `Invalid level: ${input}`;
   level = input;
   roundCount = validLevels[input];
-  currentRound = 1;
+  currentRound = 1; // start from round 1
   return roundCount;
 }
+
 
 function setText(element, text) {
   element.textContent = text;
@@ -84,11 +86,15 @@ function activatePads(sequence) {
 function playComputerTurn() {
   const { color } = getRandomItem(pads);
   computerSequence.push(color);
+
+  // 🎯 Display current round
   setText(statusSpan, `Round ${currentRound} of ${roundCount}`);
   statusSpan.classList.remove("hidden");
+
   activatePads(computerSequence);
   setTimeout(() => playHumanTurn(), computerSequence.length * 600 + 1000);
 }
+
 
 function playHumanTurn() {
   setText(statusSpan, "Your turn");
@@ -119,11 +125,12 @@ function checkRound() {
   if (computerSequence.length === roundCount) {
     resetGame("You win!");
   } else {
-    currentRound++;
+    currentRound++; // 🎯 Increment round
     padContainer.classList.add("unclickable");
     setTimeout(() => playComputerTurn(), 1000);
   }
 }
+
 
 function resetGame(text) {
   alert(text);
