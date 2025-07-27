@@ -87,24 +87,23 @@ function playComputerTurn() {
   const { color } = getRandomItem(pads);
   computerSequence.push(color);
 
-  // ✅ Show status message
+  // ✅ Show proper round & status
   setText(statusSpan, `Round ${computerSequence.length} — Watch closely`);
   statusSpan.classList.remove("hidden");
 
-  // ⏯ Play the sequence
   activatePads(computerSequence);
-
-  // ⏱ After sequence, switch to human's turn
   setTimeout(() => playHumanTurn(), computerSequence.length * 600 + 1000);
 }
 
 
 
+
 function playHumanTurn() {
-  setText(statusSpan, "Your turn");
+  setText(statusSpan, `Round ${computerSequence.length} — Your turn`);
   padContainer.classList.remove("unclickable");
   humanSequence = [];
 }
+
 
 function padHandler(event) {
   const { color } = event.target.dataset;
