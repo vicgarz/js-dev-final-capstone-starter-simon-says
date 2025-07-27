@@ -38,7 +38,8 @@ const pads = [
 let computerSequence = [];
 let humanSequence = [];
 let level = 1;
-let roundCount;
+let roundCount = 0;
+let currentRound = 0;
 
 /**
  * GAME FUNCTIONS
@@ -48,6 +49,7 @@ function setLevel(input = 1) {
   if (!validLevels[input]) return `Invalid level: ${input}`;
   level = input;
   roundCount = validLevels[input];
+  currentRound = 1;
   return roundCount;
 }
 
@@ -62,7 +64,7 @@ function getRandomItem(collection) {
 }
 
 function activatePad(color) {
-  const pad = pads.find(p => p.color === color);
+  const pad = pads.find((p) => p.color === color);
   if (!pad) return;
   pad.sound.play();
   pad.selector.classList.add("activated");
@@ -82,7 +84,7 @@ function activatePads(sequence) {
 function playComputerTurn() {
   const { color } = getRandomItem(pads);
   computerSequence.push(color);
-  setText(statusSpan, "Watch the sequence");
+  setText(statusSpan, `Round ${currentRound} of ${roundCount}`);
   statusSpan.classList.remove("hidden");
   activatePads(computerSequence);
   setTimeout(() => playHumanTurn(), computerSequence.length * 600 + 1000);
@@ -117,6 +119,7 @@ function checkRound() {
   if (computerSequence.length === roundCount) {
     resetGame("You win!");
   } else {
+    currentRound++;
     padContainer.classList.add("unclickable");
     setTimeout(() => playComputerTurn(), 1000);
   }
@@ -130,6 +133,8 @@ function resetGame(text) {
   padContainer.classList.add("unclickable");
   computerSequence = [];
   humanSequence = [];
+  roundCount = 0;
+  currentRound = 0;
 }
 
 function startButtonHandler() {
